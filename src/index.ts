@@ -1,9 +1,67 @@
+/**
+Normalize and format durations of time.
+
+```ts
+import { type Duration, normalizeDuration, formatDuration } from "@samual/duration"
+
+let duration: Duration = { years: 0, days: 0, hours: 0, milliseconds: Date.now() }
+
+normalizeDuration(duration)
+console.log(duration) // { years: 54, days: 349, hours: 11, milliseconds: 2834227 }
+duration.milliseconds = undefined
+console.log(formatDuration(duration)) // "54 years, 349 days, 11 hours"
+```
+@module
+*/
+
 import type { LaxPartial } from "@samual/lib"
 
-export type Duration =
-	LaxPartial<{ years: number, days: number, hours: number, minutes: number, seconds: number, milliseconds: number }>
+/**
+A duration of time.
 
+Properties set to
+[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) are treated as
+if they don't exist. The presence of properties is optional, absent properties are treated the same as if they are set
+to `undefined`. Properties are optional for forwards compatibilty. i.e. A **`Duration`** generated with an old version
+of this library can be used with the {@linkcode formatDuration()} from a future version of this library.
 
+In the future, more units of time will be added, these units can be inserted in between existing ones.
+
+@example Basic usage
+```ts
+import type { Duration } from "@samual/duration"
+
+let duration: Duration = { milliseconds: Date.now() }
+```
+*/
+export type Duration = LaxPartial<{
+	/** The number of years in the duration. Same as 365 days. */ years: number,
+	/** The number of days in the duration. Same as 24 hours */ days: number,
+	/** The number of hours in the duration. Same as 60 minutes */ hours: number,
+	/** The number of minutes in the duration. Same as 60 seconds */ minutes: number,
+	/** The number of seconds in the duration. Same as 1000 milliseconds */ seconds: number,
+	/** The number of milliseconds in the duration. */ milliseconds: number
+}>
+
+/**
+Normalize a {@linkcode Duration}.
+
+e.g. 120,000 milliseconds becomes 2 minutes.
+
+This function mutates the given `Duration`, hence why it doesn't return anything.
+
+@param duration The {@linkcode Duration} to be normalized.
+
+@example Basic usage
+```ts
+import { type Duration, normalizeDuration } from "@samual/duration"
+
+let duration: Duration = { years: 0, days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: Date.now() }
+
+normalizeDuration(duration)
+console.log(duration) // { years: 54, days: 349, hours: 11, minutes: 47, seconds: 14, milliseconds: 227 }
+```
+*/
 export function normalizeDuration(duration: Duration): void {
 	let milliseconds = duration.milliseconds ?? 0
 	let seconds = duration.seconds ?? 0
@@ -52,14 +110,34 @@ export function normalizeDuration(duration: Duration): void {
 		duration.milliseconds = milliseconds
 }
 
+/** Error that can be thrown by {@linkcode formatDuration()}. */
 export class FormatDurationError extends Error {}
 Object.defineProperty(FormatDurationError.prototype, `name`, { value: `FormatDurationError` })
 
+/** Error that can be thrown by {@linkcode formatDuration()} for trying to format an empty duration. */
 export class FormatEmptyDurationError extends FormatDurationError {}
 Object.defineProperty(FormatEmptyDurationError.prototype, `name`, { value: `FormatEmptyDurationError` })
 
-type FormatDurationOptions = LaxPartial<{ hideZero: boolean }>
+/** Available options for configuring {@linkcode formatDuration()}. */
+type FormatDurationOptions = LaxPartial<{
+	/**
+	When set to `true`, skips formatting entries that are `0`, as if they were set to
+	[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined).
 
+	@default false
+	*/
+	hideZero: boolean
+}>
+
+/**
+Format a {@linkcode Duration} as a [`string`](https://developer.mozilla.org/en-US/docs/Glossary/String).
+
+@param duration The {@linkcode Duration} to be formatted.
+@param options Can be configured with {@linkcode FormatDurationOptions}.
+@returns Formatted duration as a [`string`](https://developer.mozilla.org/en-US/docs/Glossary/String).
+@throws Throws {@linkcode FormatEmptyDurationError} when given empty duration.
+@throws May throw other {@linkcode FormatDurationError} instances.
+*/
 export const formatDuration = (
 	{ years, days, hours, minutes, seconds, milliseconds }: Duration, { hideZero = false }: FormatDurationOptions = {}
 ): string => {
