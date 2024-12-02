@@ -138,22 +138,20 @@ Format a {@linkcode Duration} as a [`string`](https://developer.mozilla.org/en-U
 @throws Throws {@linkcode FormatEmptyDurationError} when given empty duration.
 @throws May throw other {@linkcode FormatDurationError} instances.
 */
-export const formatDuration = (
-	{ years, days, hours, minutes, seconds, milliseconds }: Duration, { hideZero = false }: FormatDurationOptions = {}
-): string => {
+export const formatDuration = (duration: Duration, options: FormatDurationOptions = {}): string => {
 	const entries: { value: number, unit: string }[] = [
-		years != undefined && { value: years, unit: `year` },
-		days != undefined && { value: days, unit: `day` },
-		hours != undefined && { value: hours, unit: `hour` },
-		minutes != undefined && { value: minutes, unit: `minute` },
-		seconds != undefined && { value: seconds, unit: `second` },
-		milliseconds != undefined && { value: milliseconds, unit: `millisecond` },
+		duration.years != undefined && { value: duration.years, unit: `year` },
+		duration.days != undefined && { value: duration.days, unit: `day` },
+		duration.hours != undefined && { value: duration.hours, unit: `hour` },
+		duration.minutes != undefined && { value: duration.minutes, unit: `minute` },
+		duration.seconds != undefined && { value: duration.seconds, unit: `second` },
+		duration.milliseconds != undefined && { value: duration.milliseconds, unit: `millisecond` },
 	].filter(Boolean)
 
 	if (!entries.length)
 		throw new FormatEmptyDurationError(`Cannot format empty duration`)
 
-	if (hideZero) {
+	if (options.hideZero) {
 		const nonZeros = entries.filter(item => item.value)
 
 		if (nonZeros.length)
