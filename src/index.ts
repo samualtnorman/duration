@@ -54,6 +54,12 @@ export function normalizeDuration(duration: Duration): void {
 		duration.milliseconds = milliseconds
 }
 
+export class FormatDurationError extends Error {}
+Object.defineProperty(FormatDurationError.prototype, `name`, { value: `FormatDurationError` })
+
+export class FormatEmptyDurationError extends FormatDurationError {}
+Object.defineProperty(FormatEmptyDurationError.prototype, `name`, { value: `FormatEmptyDurationError` })
+
 type FormatDurationOptions = LaxPartial<{ ignoreZero: boolean }>
 
 export const formatDuration = (
@@ -89,5 +95,9 @@ if (import.meta.vitest) {
 		normalizeDuration(duration)
 
 		expect(formatDuration(duration, { ignoreZero: true })).toBe(`0 seconds`)
+	})
+
+	test(`formatDuration() throws for empty Duration`, () => {
+		expect(() => formatDuration({})).toThrow(FormatEmptyDurationError)
 	})
 }
