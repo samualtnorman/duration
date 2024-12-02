@@ -333,12 +333,12 @@ export const formatDuration = (duration: Duration, options: FormatDurationOption
 		const nonZeros = entries.filter(item => item.value)
 
 		if (nonZeros.length)
-			return nonZeros.map(item => `${item.value} ${item.unit}`).join(`, `)
+			return nonZeros.map(item => `${item.value}${options.noSpaceBeforeUnit ? `` : ` `}${item.unit}`).join(`, `)
 
 		return `0 ${entries[0]!.unit}`
 	}
 
-	return entries.map(item => `${item.value} ${item.unit}`).join(`, `)
+	return entries.map(item => `${item.value}${options.noSpaceBeforeUnit ? `` : ` `}${item.unit}`).join(`, `)
 }
 
 if (import.meta.vitest) {
