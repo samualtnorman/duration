@@ -203,6 +203,78 @@ type FormatDurationOptions = LaxPartial<{
 	@default undefined
 	*/
 	maxEntries: number
+
+	/**
+	Override the name of the {@linkcode Duration.years} unit.
+	@default "year"
+	*/
+	yearUnitNameSingular: string
+
+	/**
+	Override the plural of the {@linkcode Duration.years} unit.
+	@default "years"
+	*/
+	yearUnitNamePlural: string
+
+	/**
+	Override the name of the {@linkcode Duration.days} unit.
+	@default "day"
+	*/
+	dayUnitNameSingular: string
+
+	/**
+	Override the plural of the {@linkcode Duration.days} unit.
+	@default "days"
+	*/
+	dayUnitNamePlural: string
+
+	/**
+	Override the name of the {@linkcode Duration.hours} unit.
+	@default "hour"
+	*/
+	hourUnitNameSingular: string
+
+	/**
+	Override the plural of the {@linkcode Duration.hours} unit.
+	@default "hours"
+	*/
+	hourUnitNamePlural: string
+
+	/**
+	Override the name of the {@linkcode Duration.minutes} unit.
+	@default "minute"
+	*/
+	minuteUnitNameSingular: string
+
+	/**
+	Override the plural of the {@linkcode Duration.minutes} unit.
+	@default "minutes"
+	*/
+	minuteUnitNamePlural: string
+
+	/**
+	Override the name of the {@linkcode Duration.seconds} unit.
+	@default "second"
+	*/
+	secondUnitNameSingular: string
+
+	/**
+	Override the plural of the {@linkcode Duration.seconds} unit.
+	@default "seconds"
+	*/
+	secondUnitNamePlural: string
+
+	/**
+	Override the name of the {@linkcode Duration.milliseconds} unit.
+	@default "millisecond"
+	*/
+	millisecondUnitNameSingular: string
+
+	/**
+	Override the plural of the {@linkcode Duration.milliseconds} unit.
+	@default "milliseconds"
+	*/
+	millisecondUnitNamePlural: string
 }>
 
 /**
@@ -266,5 +338,22 @@ if (import.meta.vitest) {
 
 	test(`formatDuration() maxEntries: 2`, () => {
 		expect(formatDuration({ days: 1, hours: 2, minutes: 3 }, { maxEntries: 2 })).toBe(`1 day, 2 hours`)
+	})
+
+	test(`formatDuration() custom unit names`, () => {
+		expect(formatDuration({ years: 54, days: 349, hours: 11, minutes: 47, seconds: 14, milliseconds: 227 }, {
+			yearUnitNameSingular: `y`,
+			yearUnitNamePlural: `y`,
+			dayUnitNameSingular: `d`,
+			dayUnitNamePlural: `d`,
+			hourUnitNameSingular: `h`,
+			hourUnitNamePlural: `h`,
+			minuteUnitNameSingular: `m`,
+			minuteUnitNamePlural: `m`,
+			secondUnitNameSingular: `s`,
+			secondUnitNamePlural: `s`,
+			millisecondUnitNameSingular: `ms`,
+			millisecondUnitNamePlural: `ms`
+		})).toBe(`54 y, 349 d, 11 h, 47 m, 14 s, 227 ms`)
 	})
 }
