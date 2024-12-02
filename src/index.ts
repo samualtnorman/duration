@@ -74,13 +74,16 @@ export const formatDuration = (
 		milliseconds != undefined && { value: milliseconds, unit: `millisecond` },
 	].filter(Boolean)
 
+	if (!entries.length)
+		throw new FormatEmptyDurationError(`Cannot format empty duration`)
+
 	if (ignoreZero) {
 		const nonZeros = entries.filter(item => item.value)
 
 		if (nonZeros.length)
 			return nonZeros.map(item => `${item.value} ${item.unit}${item.value == 1 ? `` : `s`}`).join(`, `)
 
-		return `0 ${entries[0].unit}s`
+		return `0 ${entries[0]!.unit}s`
 	}
 
 	return entries.map(item => `${item.value} ${item.unit}${item.value == 1 ? `` : `s`}`).join(`, `)
