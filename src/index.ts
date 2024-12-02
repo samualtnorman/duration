@@ -133,7 +133,7 @@ type FormatDurationOptions = LaxPartial<{
 Format a {@linkcode Duration} as a [`string`](https://developer.mozilla.org/en-US/docs/Glossary/String).
 
 @param duration The {@linkcode Duration} to be formatted.
-@param options Can be configured with {@linkcode FormatDurationOptions}.
+@param options The {@linkcode FormatDurationOptions} used to confure how duration gets formatted.
 @returns Formatted duration as a [`string`](https://developer.mozilla.org/en-US/docs/Glossary/String).
 @throws Throws {@linkcode FormatEmptyDurationError} when given empty duration.
 @throws May throw other {@linkcode FormatDurationError} instances.
