@@ -225,7 +225,7 @@ export const formatDuration = (duration: Duration, options: FormatDurationOption
 		duration.minutes != undefined && { value: duration.minutes, unit: `minute` },
 		duration.seconds != undefined && { value: duration.seconds, unit: `second` },
 		duration.milliseconds != undefined && { value: duration.milliseconds, unit: `millisecond` },
-	].filter(Boolean)
+	].filter(Boolean).slice(0, options.maxEntries)
 
 	if (!entries.length)
 		throw new FormatEmptyDurationError(`Cannot format empty duration`)
