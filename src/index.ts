@@ -19,13 +19,12 @@ import type { LaxPartial } from "@samual/lib"
 /**
 A duration of time.
 
-Properties set to
-[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) are treated as
-if they don't exist. The presence of properties is optional, absent properties are treated the same as if they are set
-to `undefined`. Properties are optional for forwards compatibilty. i.e. A **`Duration`** generated with an old version
-of this library can be used with the {@linkcode formatDuration()} from a future version of this library.
-
-In the future, more units of time will be added, these units can be inserted in between existing ones.
+All properties are optional and must be set to
+[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) or an integer
+(be able to pass
+[`Number.isInteger()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)).
+Absent properties and properties set to `undefined` are treated the same.
+More units of time will be added in the future.
 
 @example Basic usage
 ```ts
@@ -35,12 +34,65 @@ let duration: Duration = { milliseconds: Date.now() }
 ```
 */
 export type Duration = LaxPartial<{
-	/** The number of years in the duration. Same as 365 days. */ years: number,
-	/** The number of days in the duration. Same as 24 hours */ days: number,
-	/** The number of hours in the duration. Same as 60 minutes */ hours: number,
-	/** The number of minutes in the duration. Same as 60 seconds */ minutes: number,
-	/** The number of seconds in the duration. Same as 1000 milliseconds */ seconds: number,
-	/** The number of milliseconds in the duration. */ milliseconds: number
+	/**
+	The number of years in the duration. Same as 365 days.
+
+	Must be set to
+	[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) or an
+	integer (be able to pass
+	[`Number.isInteger()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)).
+	*/
+	years: number,
+
+	/**
+	The number of days in the duration. Same as 24 hours
+
+	Must be set to
+	[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) or an
+	integer (be able to pass
+	[`Number.isInteger()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)).
+	*/
+	days: number,
+
+	/**
+	The number of hours in the duration. Same as 60 minutes
+
+	Must be set to
+	[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) or an
+	integer (be able to pass
+	[`Number.isInteger()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)).
+	*/
+	hours: number,
+
+	/**
+	The number of minutes in the duration. Same as 60 seconds
+
+	Must be set to
+	[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) or an
+	integer (be able to pass
+	[`Number.isInteger()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)).
+	*/
+	minutes: number,
+
+	/**
+	The number of seconds in the duration. Same as 1000 milliseconds
+
+	Must be set to
+	[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) or an
+	integer (be able to pass
+	[`Number.isInteger()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)).
+	*/
+	seconds: number,
+
+	/**
+	The number of milliseconds in the duration.
+
+	Must be set to
+	[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) or an
+	integer (be able to pass
+	[`Number.isInteger()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)).
+	*/
+	milliseconds: number
 }>
 
 /** Error that can be thrown by {@linkcode normalizeDuration()}. */
@@ -59,6 +111,8 @@ e.g. 120,000 milliseconds becomes 2 minutes.
 This function mutates the given `Duration`, hence why it doesn't return anything.
 
 @param duration The {@linkcode Duration} to be normalized.
+@throws Any {@linkcode NormalizeDurationError}.
+@throws A {@linkcode NormalizeNonIntegerDurationError} for trying to normalize a duration with numbers that aren't integers.
 
 @example Basic usage
 ```ts
@@ -150,8 +204,8 @@ Format a {@linkcode Duration} as a [`string`](https://developer.mozilla.org/en-U
 @param duration The {@linkcode Duration} to be formatted.
 @param options The {@linkcode FormatDurationOptions} used to confure how duration gets formatted.
 @returns Formatted duration as a [`string`](https://developer.mozilla.org/en-US/docs/Glossary/String).
-@throws Throws {@linkcode FormatEmptyDurationError} when given empty duration.
-@throws May throw other {@linkcode FormatDurationError} instances.
+@throws Any {@linkcode FormatDurationError}.
+@throws A {@linkcode FormatEmptyDurationError} when given empty duration.
 */
 export const formatDuration = (duration: Duration, options: FormatDurationOptions = {}): string => {
 	if (Object.values(duration).some(value => value && !Number.isInteger(value)))
