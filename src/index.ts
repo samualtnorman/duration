@@ -290,13 +290,34 @@ export const formatDuration = (duration: Duration, options: FormatDurationOption
 	if (Object.values(duration).some(value => value && !Number.isInteger(value)))
 		throw new FormatNonIntegerDurationError(`Duration properties must be set to undefined or integers`)
 
+	const yearUnitNameSingular = options.yearUnitNameSingular ?? `year`
+	const yearUnitNamePlural = options.yearUnitNamePlural ?? `years`
+	const dayUnitNameSingular = options.dayUnitNameSingular ?? `day`
+	const dayUnitNamePlural = options.dayUnitNamePlural ?? `days`
+	const hourUnitNameSingular = options.hourUnitNameSingular ?? `hour`
+	const hourUnitNamePlural = options.hourUnitNamePlural ?? `hours`
+	const minuteUnitNameSingular = options.minuteUnitNameSingular ?? `minute`
+	const minuteUnitNamePlural = options.minuteUnitNamePlural ?? `minutes`
+	const secondUnitNameSingular = options.secondUnitNameSingular ?? `second`
+	const secondUnitNamePlural = options.secondUnitNamePlural ?? `seconds`
+	const millisecondUnitNameSingular = options.millisecondUnitNameSingular ?? `millisecond`
+	const millisecondUnitNamePlural = options.millisecondUnitNamePlural ?? `milliseconds`
+
 	const entries: { value: number, unit: string }[] = [
-		duration.years != undefined && { value: duration.years, unit: `year` },
-		duration.days != undefined && { value: duration.days, unit: `day` },
-		duration.hours != undefined && { value: duration.hours, unit: `hour` },
-		duration.minutes != undefined && { value: duration.minutes, unit: `minute` },
-		duration.seconds != undefined && { value: duration.seconds, unit: `second` },
-		duration.milliseconds != undefined && { value: duration.milliseconds, unit: `millisecond` },
+		duration.years != undefined &&
+			{ value: duration.years, unit: duration.years == 1 ? yearUnitNameSingular : yearUnitNamePlural },
+		duration.days != undefined &&
+			{ value: duration.days, unit: duration.days == 1 ? dayUnitNameSingular : dayUnitNamePlural },
+		duration.hours != undefined &&
+			{ value: duration.hours, unit: duration.hours == 1 ? hourUnitNameSingular : hourUnitNamePlural },
+		duration.minutes != undefined &&
+			{ value: duration.minutes, unit: duration.minutes == 1 ? minuteUnitNameSingular : minuteUnitNamePlural },
+		duration.seconds != undefined &&
+			{ value: duration.seconds, unit: duration.seconds == 1 ? secondUnitNameSingular : secondUnitNamePlural },
+		duration.milliseconds != undefined && {
+			value: duration.milliseconds,
+			unit: duration.milliseconds == 1 ? millisecondUnitNameSingular : millisecondUnitNamePlural
+		},
 	].filter(Boolean).slice(0, options.maxEntries)
 
 	if (!entries.length)
@@ -306,12 +327,12 @@ export const formatDuration = (duration: Duration, options: FormatDurationOption
 		const nonZeros = entries.filter(item => item.value)
 
 		if (nonZeros.length)
-			return nonZeros.map(item => `${item.value} ${item.unit}${item.value == 1 ? `` : `s`}`).join(`, `)
+			return nonZeros.map(item => `${item.value} ${item.unit}`).join(`, `)
 
-		return `0 ${entries[0]!.unit}s`
+		return `0 ${entries[0]!.unit}`
 	}
 
-	return entries.map(item => `${item.value} ${item.unit}${item.value == 1 ? `` : `s`}`).join(`, `)
+	return entries.map(item => `${item.value} ${item.unit}`).join(`, `)
 }
 
 if (import.meta.vitest) {
