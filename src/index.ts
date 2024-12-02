@@ -71,6 +71,9 @@ console.log(duration) // { years: 54, days: 349, hours: 11, minutes: 47, seconds
 ```
 */
 export function normalizeDuration(duration: Duration): void {
+	if (Object.values(duration).some(value => value && !Number.isInteger(value)))
+		throw new NormalizeNonIntegerDurationError(`Duration properties must be set to undefined or integers`)
+
 	let milliseconds = duration.milliseconds ?? 0
 	let seconds = duration.seconds ?? 0
 	let minutes = duration.minutes ?? 0
@@ -151,6 +154,9 @@ Format a {@linkcode Duration} as a [`string`](https://developer.mozilla.org/en-U
 @throws May throw other {@linkcode FormatDurationError} instances.
 */
 export const formatDuration = (duration: Duration, options: FormatDurationOptions = {}): string => {
+	if (Object.values(duration).some(value => value && !Number.isInteger(value)))
+		throw new FormatNonIntegerDurationError(`Duration properties must be set to undefined or integers`)
+
 	const entries: { value: number, unit: string }[] = [
 		duration.years != undefined && { value: duration.years, unit: `year` },
 		duration.days != undefined && { value: duration.days, unit: `day` },
