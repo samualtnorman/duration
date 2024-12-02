@@ -196,6 +196,13 @@ type FormatDurationOptions = LaxPartial<{
 	@default false
 	*/
 	hideZero: boolean
+
+	/**
+	The maximum number of entries to format or has no affect when set to
+	[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined).
+	@default undefined
+	*/
+	maxEntries: number
 }>
 
 /**
@@ -255,5 +262,9 @@ if (import.meta.vitest) {
 
 	test(`formatDuration() throws for non-integers`, () => {
 		expect(() => formatDuration({ seconds: 1.5 })).toThrow(FormatNonIntegerDurationError)
+	})
+
+	test(`formatDuration() maxEntries: 2`, () => {
+		expect(formatDuration({ days: 1, hours: 2, minutes: 3 }, { maxEntries: 2 })).toBe(`1 day, 2 hours`)
 	})
 }
