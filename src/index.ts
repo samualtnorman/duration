@@ -58,15 +58,27 @@ type FormatDurationOptions = LaxPartial<{ ignoreZero: boolean }>
 
 export const formatDuration = (
 	{ years, days, hours, minutes, seconds, milliseconds }: Duration, { ignoreZero = false }: FormatDurationOptions = {}
-): string => [
-	(ignoreZero ? years : years != undefined) && `${years} year${years == 1 ? `` : `s`}`,
-	(ignoreZero ? days : days != undefined) && `${days} day${days == 1 ? `` : `s`}`,
-	(ignoreZero ? hours : hours != undefined) && `${hours} hour${hours == 1 ? `` : `s`}`,
-	(ignoreZero ? minutes : minutes != undefined) && `${minutes} minute${minutes == 1 ? `` : `s`}`,
-	(ignoreZero ? seconds : seconds != undefined) && `${seconds} second${seconds == 1 ? `` : `s`}`,
-	(ignoreZero ? milliseconds : milliseconds != undefined) &&
-		`${milliseconds} millisecond${milliseconds == 1 ? `` : `s`}`
-].filter(Boolean).join(`, `)
+): string => {
+	const entries: { value: number, unit: string }[] = [
+		years != undefined && { value: years, unit: `year` },
+		days != undefined && { value: days, unit: `day` },
+		hours != undefined && { value: hours, unit: `hour` },
+		minutes != undefined && { value: minutes, unit: `minute` },
+		seconds != undefined && { value: seconds, unit: `second` },
+		milliseconds != undefined && { value: milliseconds, unit: `millisecond` },
+	].filter(Boolean)
+
+	if (ignoreZero) {
+		const nonZeros = entries.filter(item => item.value)
+
+		if (nonZeros.length)
+			return nonZeros.map(item => `${item.value} ${item.unit}${item.value == 1 ? `` : `s`}`).join(`, `)
+
+		return `0 ${entries[0].unit}s`
+	}
+
+	return entries.map(item => `${item.value} ${item.unit}${item.value == 1 ? `` : `s`}`).join(`, `)
+}
 
 if (import.meta.vitest) {
 	const { test, expect } = import.meta.vitest
