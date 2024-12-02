@@ -95,8 +95,12 @@ export type Duration = LaxPartial<{
 	milliseconds: number
 }>
 
+/** Parent error of all errors intentionally thrown by `@samual/duration`. */
+export class DurationError extends Error {}
+Object.defineProperty(DurationError.prototype, `name`, { value: `DurationError` })
+
 /** Error that can be thrown by {@linkcode normalizeDuration()}. */
-export class NormalizeDurationError extends Error {}
+export class NormalizeDurationError extends DurationError {}
 Object.defineProperty(NormalizeDurationError.prototype, `name`, { value: `NormalizeDurationError` })
 
 /** Error that can be thrown by {@linkcode normalizeDuration()} for trying to normalize non-integers. */
@@ -176,7 +180,7 @@ export function normalizeDuration(duration: Duration): void {
 }
 
 /** Error that can be thrown by {@linkcode formatDuration()}. */
-export class FormatDurationError extends Error {}
+export class FormatDurationError extends DurationError {}
 Object.defineProperty(FormatDurationError.prototype, `name`, { value: `FormatDurationError` })
 
 /** Error that can be thrown by {@linkcode formatDuration()} for trying to format an empty duration. */
