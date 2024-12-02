@@ -275,6 +275,12 @@ type FormatDurationOptions = LaxPartial<{
 	@default "milliseconds"
 	*/
 	millisecondUnitNamePlural: string
+
+	/**
+	When `false`, a space will be inserted before the unit otherwise won't.
+	@default false
+	*/
+	noSpaceBeforeUnit: boolean
 }>
 
 /**
@@ -376,5 +382,23 @@ if (import.meta.vitest) {
 			millisecondUnitNameSingular: `ms`,
 			millisecondUnitNamePlural: `ms`
 		})).toBe(`54 y, 349 d, 11 h, 47 m, 14 s, 227 ms`)
+	})
+
+	test(`formatDuration() custom unit names`, () => {
+		expect(formatDuration({ years: 54, days: 349, hours: 11, minutes: 47, seconds: 14, milliseconds: 227 }, {
+			yearUnitNameSingular: `y`,
+			yearUnitNamePlural: `y`,
+			dayUnitNameSingular: `d`,
+			dayUnitNamePlural: `d`,
+			hourUnitNameSingular: `h`,
+			hourUnitNamePlural: `h`,
+			minuteUnitNameSingular: `m`,
+			minuteUnitNamePlural: `m`,
+			secondUnitNameSingular: `s`,
+			secondUnitNamePlural: `s`,
+			millisecondUnitNameSingular: `ms`,
+			millisecondUnitNamePlural: `ms`,
+			noSpaceBeforeUnit: true
+		})).toBe(`54y, 349d, 11h, 47m, 14s, 227ms`)
 	})
 }
