@@ -3,8 +3,6 @@ import type { LaxPartial } from "@samual/lib"
 export type Duration =
 	LaxPartial<{ years: number, days: number, hours: number, minutes: number, seconds: number, milliseconds: number }>
 
-export const Duration = ({ years, days, hours, minutes, seconds, milliseconds }: Partial<Duration>): Duration =>
-	({ years, days, hours, minutes, seconds, milliseconds })
 
 export function normalizeDuration(duration: Duration): void {
 	let milliseconds = duration.milliseconds ?? 0
@@ -93,7 +91,7 @@ if (import.meta.vitest) {
 	const { test, expect } = import.meta.vitest
 
 	test(`formatDuration() does not make empty string`, () => {
-		const duration = Duration({ seconds: 0 })
+		const duration: Duration = { seconds: 0 }
 
 		normalizeDuration(duration)
 		expect(formatDuration(duration, { hideZero: true })).toBe(`0 seconds`)
