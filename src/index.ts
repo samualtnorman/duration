@@ -60,10 +60,10 @@ Object.defineProperty(FormatDurationError.prototype, `name`, { value: `FormatDur
 export class FormatEmptyDurationError extends FormatDurationError {}
 Object.defineProperty(FormatEmptyDurationError.prototype, `name`, { value: `FormatEmptyDurationError` })
 
-type FormatDurationOptions = LaxPartial<{ ignoreZero: boolean }>
+type FormatDurationOptions = LaxPartial<{ hideZero: boolean }>
 
 export const formatDuration = (
-	{ years, days, hours, minutes, seconds, milliseconds }: Duration, { ignoreZero = false }: FormatDurationOptions = {}
+	{ years, days, hours, minutes, seconds, milliseconds }: Duration, { hideZero = false }: FormatDurationOptions = {}
 ): string => {
 	const entries: { value: number, unit: string }[] = [
 		years != undefined && { value: years, unit: `year` },
@@ -77,7 +77,7 @@ export const formatDuration = (
 	if (!entries.length)
 		throw new FormatEmptyDurationError(`Cannot format empty duration`)
 
-	if (ignoreZero) {
+	if (hideZero) {
 		const nonZeros = entries.filter(item => item.value)
 
 		if (nonZeros.length)
@@ -96,7 +96,7 @@ if (import.meta.vitest) {
 		const duration = Duration({ seconds: 0 })
 
 		normalizeDuration(duration)
-		expect(formatDuration(duration, { ignoreZero: true })).toBe(`0 seconds`)
+		expect(formatDuration(duration, { hideZero: true })).toBe(`0 seconds`)
 	})
 
 	test(`formatDuration() throws for empty Duration`, () => {
