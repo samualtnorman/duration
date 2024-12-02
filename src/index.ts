@@ -43,6 +43,14 @@ export type Duration = LaxPartial<{
 	/** The number of milliseconds in the duration. */ milliseconds: number
 }>
 
+/** Error that can be thrown by {@linkcode normalizeDuration()}. */
+export class NormalizeDurationError extends Error {}
+Object.defineProperty(NormalizeDurationError.prototype, `name`, { value: `NormalizeDurationError` })
+
+/** Error that can be thrown by {@linkcode normalizeDuration()} for trying to normalize non-integers. */
+export class NormalizeNonIntegerDurationError extends NormalizeDurationError {}
+Object.defineProperty(NormalizeNonIntegerDurationError.prototype, `name`, { value: `NormalizeDurationNonIntegerError` })
+
 /**
 Normalize a {@linkcode Duration}.
 
@@ -118,6 +126,10 @@ Object.defineProperty(FormatDurationError.prototype, `name`, { value: `FormatDur
 export class FormatEmptyDurationError extends FormatDurationError {}
 Object.defineProperty(FormatEmptyDurationError.prototype, `name`, { value: `FormatEmptyDurationError` })
 
+/** Error that can be thrown by {@linkcode formatDuration()} for trying to format non-integers. */
+export class FormatNonIntegerDurationError extends FormatDurationError {}
+Object.defineProperty(FormatEmptyDurationError.prototype, `name`, { value: `FormatEmptyDurationError` })
+
 /** Available options for configuring {@linkcode formatDuration()}. */
 type FormatDurationOptions = LaxPartial<{
 	/**
@@ -166,6 +178,10 @@ export const formatDuration = (duration: Duration, options: FormatDurationOption
 if (import.meta.vitest) {
 	const { test, expect } = import.meta.vitest
 
+	test(`normalizeDuration() throws for non-integers`, () => {
+		expect(() => normalizeDuration({ seconds: 1.5 })).toThrow(NormalizeNonIntegerDurationError)
+	})
+
 	test(`formatDuration() does not make empty string`, () => {
 		const duration: Duration = { seconds: 0 }
 
@@ -175,5 +191,9 @@ if (import.meta.vitest) {
 
 	test(`formatDuration() throws for empty Duration`, () => {
 		expect(() => formatDuration({})).toThrow(FormatEmptyDurationError)
+	})
+
+	test(`formatDuration() throws for non-integers`, () => {
+		expect(() => formatDuration({ seconds: 1.5 })).toThrow(FormatNonIntegerDurationError)
 	})
 }
