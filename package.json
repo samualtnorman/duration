@@ -1,0 +1,41 @@
+{
+	"name": "typescript-template",
+	"version": "0.0.0",
+	"description": "remember to update urls in this file",
+	"keywords": [],
+	"homepage": "https://github.com/samualtnorman/typescript-template#readme",
+	"bugs": {
+		"url": "https://github.com/samualtnorman/typescript-template/issues",
+		"email": "me@samual.uk"
+	},
+	"license": "MIT",
+	"author": "Samual Norman <me@samual.uk> (https://samual.uk/)",
+	"repository": "github:samualtnorman/typescript-template",
+	"type": "module",
+	"exports": {
+		".": "./index.js",
+		"./*": "./*.js",
+		"./*.js": "./*.js"
+	},
+	"dependencies": {
+		"@samual/lib": "~0.13.0"
+	},
+	"devDependencies": {
+		"@babel/plugin-syntax-typescript": "^7.25.9",
+		"@rollup/plugin-babel": "^6.0.4",
+		"@samual/rollup-config": "^0.1.2",
+		"@total-typescript/ts-reset": "^0.6.1",
+		"@types/node": "^18.19.67",
+		"@types/semver": "^7.5.8",
+		"babel-plugin-here": "^1.0.2",
+		"rollup": "^4.28.0",
+		"semver": "^7.6.3",
+		"typescript": "^5.7.2",
+		"vitest": "^2.1.7"
+	},
+	"engines": {
+		"node": "^18.20 || ^20.10 || >=22",
+		"pnpm": "^9"
+	},
+	"private": true
+}
