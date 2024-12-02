@@ -93,7 +93,6 @@ if (import.meta.vitest) {
 		const duration = Duration({ seconds: 0 })
 
 		normalizeDuration(duration)
-
 		expect(formatDuration(duration, { ignoreZero: true })).toBe(`0 seconds`)
 	})
 
