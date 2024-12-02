@@ -67,3 +67,15 @@ export const formatDuration = (
 	(ignoreZero ? milliseconds : milliseconds != undefined) &&
 		`${milliseconds} millisecond${milliseconds == 1 ? `` : `s`}`
 ].filter(Boolean).join(`, `)
+
+if (import.meta.vitest) {
+	const { test, expect } = import.meta.vitest
+
+	test(`formatDuration() does not make empty string`, () => {
+		const duration = Duration({ seconds: 0 })
+
+		normalizeDuration(duration)
+
+		expect(formatDuration(duration, { ignoreZero: true })).toBe(`0 seconds`)
+	})
+}
