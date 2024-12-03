@@ -1,16 +1,16 @@
 {
-	"name": "typescript-template",
+	"name": "@samual/duration",
 	"version": "0.0.0",
-	"description": "remember to update urls in this file",
-	"keywords": [],
-	"homepage": "https://github.com/samualtnorman/typescript-template#readme",
+	"description": "Normalize and format durations of time.",
+	"keywords": [ "date", "duration", "time", "format", "normalize", "normalise" ],
+	"homepage": "https://github.com/samualtnorman/duration#readme",
 	"bugs": {
-		"url": "https://github.com/samualtnorman/typescript-template/issues",
+		"url": "https://github.com/samualtnorman/duration/issues",
 		"email": "me@samual.uk"
 	},
 	"license": "MIT",
 	"author": "Samual Norman <me@samual.uk> (https://samual.uk/)",
-	"repository": "github:samualtnorman/typescript-template",
+	"repository": "github:samualtnorman/duration",
 	"type": "module",
 	"exports": {
 		".": "./index.js",
