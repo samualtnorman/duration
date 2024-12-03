@@ -295,6 +295,7 @@ Format a {@linkcode Duration} as a [`string`](https://developer.mozilla.org/en-U
 @returns Formatted duration as a [`string`](https://developer.mozilla.org/en-US/docs/Glossary/String).
 @throws Any {@linkcode FormatDurationError}.
 @throws A {@linkcode FormatEmptyDurationError} when given empty duration.
+@throws A {@linkcode FormatNonIntegerDurationError} when given duration with numbers that aren't integers.
 */
 export const formatDuration = (duration: Duration, options: FormatDurationOptions = {}): string => {
 	if (Object.values(duration).some(value => value && !Number.isInteger(value)))
