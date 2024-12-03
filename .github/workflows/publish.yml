@@ -1,0 +1,23 @@
+name: Publish
+on: { push: { branches: [ main ] } }
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    permissions: { contents: read, id-token: write }
+
+    steps:
+      - { name: Checkout, uses: actions/checkout@v4 }
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with: { node-version: ^18.20 || ^20.10 || >=22 }
+
+      - { name: Setup pnpm, uses: pnpm/action-setup@v4, with: { version: ^9, run_install: true } }
+      - run: git config --global user.email github-action@users.noreply.github.com
+      - run: git config --global user.name "Github Action"
+      - run: export PATH=$PWD/node_modules/.bin:$PATH
+      - run: scripts/version-dev.js
+      - run: scripts/jsr.sh
+      - { run: pnpm dlx jsr publish, working-directory: dist }
