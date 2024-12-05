@@ -5,4 +5,4 @@ rm -rf dist
 scripts/emit-types.sh
 scripts/emit-package-json.js
 scripts/emit-jsr-json.js
-cp licence readme.md dist
+cp LICENSE readme.md dist
