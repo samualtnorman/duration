@@ -139,15 +139,15 @@ export function normalizeDuration(duration: Duration): void {
 	let days = duration.days ?? 0
 	let years = duration.years ?? 0
 
-	seconds += milliseconds / 1000
+	seconds += Math.floor(milliseconds / 1000)
 	milliseconds %= 1000
-	minutes += seconds / 60
+	minutes += Math.floor(seconds / 60)
 	seconds %= 60
-	hours += minutes / 60
+	hours += Math.floor(minutes / 60)
 	minutes %= 60
-	days += hours / 24
+	days += Math.floor(hours / 24)
 	hours %= 24
-	years += days / 365
+	years += Math.floor(days / 365)
 	days %= 365
 
 	if (duration.years != undefined)
