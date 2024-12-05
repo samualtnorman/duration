@@ -298,8 +298,10 @@ Format a {@linkcode Duration} as a [`string`](https://developer.mozilla.org/en-U
 @throws A {@linkcode FormatNonIntegerDurationError} when given duration with numbers that aren't integers.
 */
 export const formatDuration = (duration: Duration, options: FormatDurationOptions = {}): string => {
-	if (Object.values(duration).some(value => value && !Number.isInteger(value)))
-		throw new FormatNonIntegerDurationError(`Given number must be an integer`)
+	const nonIntegerEntry = Object.entries(duration).find(([ , value ]) => value && !Number.isInteger(value))
+
+	if (nonIntegerEntry)
+		throw new FormatNonIntegerDurationError(`Given number must be an integer, got ${nonIntegerEntry[0]}: ${nonIntegerEntry[1]}`)
 
 	const yearUnitNameSingular = options.yearUnitNameSingular ?? `year`
 	const yearUnitNamePlural = options.yearUnitNamePlural ?? `years`
