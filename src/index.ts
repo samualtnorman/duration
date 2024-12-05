@@ -192,7 +192,7 @@ export class FormatNonIntegerDurationError extends FormatDurationError {}
 Object.defineProperty(FormatEmptyDurationError.prototype, `name`, { value: `FormatEmptyDurationError` })
 
 /** Available options for configuring {@linkcode formatDuration()}. */
-type FormatDurationOptions = LaxPartial<{
+export type FormatDurationOptions = LaxPartial<{
 	/**
 	When set to `true`, skips formatting entries that are `0`, as if they were set to
 	[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined).
