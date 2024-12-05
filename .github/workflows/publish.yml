@@ -20,4 +20,4 @@ jobs:
       - run: export PATH=$PWD/node_modules/.bin:$PATH
       - run: scripts/version-dev.js
       - run: scripts/jsr.sh
-      - { run: pnpm dlx jsr publish, working-directory: dist }
+      - { run: git init && pnpm dlx jsr publish --allow-dirty, working-directory: dist }
