@@ -408,4 +408,19 @@ if (import.meta.vitest) {
 			noSpaceBeforeUnit: true
 		})).toBe(`54y, 349d, 11h, 47m, 14s, 227ms`)
 	})
+
+	test(`normaliseDuration() only produces integers`, () => {
+		const duration: Duration = { years: 0, days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: 1733140034227 }
+
+		normalizeDuration(duration)
+
+		expect(duration).toEqual({
+			years: 54,
+			days: 349,
+			hours: 11,
+			minutes: 47,
+			seconds: 14,
+			milliseconds: 227
+		})
+	})
 }
