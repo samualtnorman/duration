@@ -2,7 +2,14 @@
 	"name": "@samual/duration",
 	"version": "0.0.0",
 	"description": "Normalize and format durations of time.",
-	"keywords": [ "date", "duration", "time", "format", "normalize", "normalise" ],
+	"keywords": [
+		"date",
+		"duration",
+		"time",
+		"format",
+		"normalize",
+		"normalise"
+	],
 	"homepage": "https://github.com/samualtnorman/duration#readme",
 	"bugs": {
 		"url": "https://github.com/samualtnorman/duration/issues",
