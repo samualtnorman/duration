@@ -98,3 +98,6 @@ export type Duration = LaxPartial<{
 /** Parent error of all errors intentionally thrown by `@samual/duration`. */
 export class DurationError extends Error {}
 Object.defineProperty(DurationError.prototype, `name`, { value: `DurationError` })
+
+export { formatDuration, FormatDurationError, FormatDurationOptions, FormatEmptyDurationError, FormatNonIntegerDurationError } from "./formatDuration"
+export { normalizeDuration, NormalizeDurationError, NormalizeNonIntegerDurationError } from "./normalizeDuration"
