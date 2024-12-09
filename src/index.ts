@@ -99,5 +99,5 @@ export type Duration = LaxPartial<{
 export class DurationError extends Error {}
 Object.defineProperty(DurationError.prototype, `name`, { value: `DurationError` })
 
-export { formatDuration, FormatDurationError, FormatDurationOptions, FormatEmptyDurationError, FormatNonIntegerDurationError } from "./formatDuration"
+export { formatDuration, FormatDurationError, FormatEmptyDurationError, FormatNonIntegerDurationError, type FormatDurationOptions } from "./formatDuration"
 export { normalizeDuration, NormalizeDurationError, NormalizeNonIntegerDurationError } from "./normalizeDuration"
