@@ -16,109 +16,109 @@ Object.defineProperty(FormatEmptyDurationError.prototype, `name`, { value: `Form
 /** Available options for configuring {@linkcode formatDuration()}. */
 export type FormatDurationOptions = LaxPartial<{
 	/**
-	When set to `true`, skips formatting entries that are `0`, as if they were set to
-	[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined).
-
-	@default false
-	*/
+	 * When set to `true`, skips formatting entries that are `0`, as if they were set to
+	 * [`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined).
+	 *
+	 * @default false
+	 */
 	hideZero: boolean
 
 	/**
-	The maximum number of entries to format or has no affect when set to
-	[`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined).
-	@default undefined
-	*/
+	 * The maximum number of entries to format or has no affect when set to
+	 * [`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined).
+	 * @default undefined
+	 */
 	maxEntries: number
 
 	/**
-	Override the name of the {@linkcode Duration.years} unit.
-	@default "year"
-	*/
+	 * Override the name of the {@linkcode Duration.years} unit.
+	 * @default "year"
+	 */
 	yearUnitNameSingular: string
 
 	/**
-	Override the plural of the {@linkcode Duration.years} unit.
-	@default "years"
-	*/
+	 * Override the plural of the {@linkcode Duration.years} unit.
+	 * @default "years"
+	 */
 	yearUnitNamePlural: string
 
 	/**
-	Override the name of the {@linkcode Duration.days} unit.
-	@default "day"
-	*/
+	 * Override the name of the {@linkcode Duration.days} unit.
+	 * @default "day"
+	 */
 	dayUnitNameSingular: string
 
 	/**
-	Override the plural of the {@linkcode Duration.days} unit.
-	@default "days"
-	*/
+	 * Override the plural of the {@linkcode Duration.days} unit.
+	 * @default "days"
+	 */
 	dayUnitNamePlural: string
 
 	/**
-	Override the name of the {@linkcode Duration.hours} unit.
-	@default "hour"
-	*/
+	 * Override the name of the {@linkcode Duration.hours} unit.
+	 * @default "hour"
+	 */
 	hourUnitNameSingular: string
 
 	/**
-	Override the plural of the {@linkcode Duration.hours} unit.
-	@default "hours"
-	*/
+	 * Override the plural of the {@linkcode Duration.hours} unit.
+	 * @default "hours"
+	 */
 	hourUnitNamePlural: string
 
 	/**
-	Override the name of the {@linkcode Duration.minutes} unit.
-	@default "minute"
-	*/
+	 * Override the name of the {@linkcode Duration.minutes} unit.
+	 * @default "minute"
+	 */
 	minuteUnitNameSingular: string
 
 	/**
-	Override the plural of the {@linkcode Duration.minutes} unit.
-	@default "minutes"
-	*/
+	 * Override the plural of the {@linkcode Duration.minutes} unit.
+	 * @default "minutes"
+	 */
 	minuteUnitNamePlural: string
 
 	/**
-	Override the name of the {@linkcode Duration.seconds} unit.
-	@default "second"
-	*/
+	 * Override the name of the {@linkcode Duration.seconds} unit.
+	 * @default "second"
+	 */
 	secondUnitNameSingular: string
 
 	/**
-	Override the plural of the {@linkcode Duration.seconds} unit.
-	@default "seconds"
-	*/
+	 * Override the plural of the {@linkcode Duration.seconds} unit.
+	 * @default "seconds"
+	 */
 	secondUnitNamePlural: string
 
 	/**
-	Override the name of the {@linkcode Duration.milliseconds} unit.
-	@default "millisecond"
-	*/
+	 * Override the name of the {@linkcode Duration.milliseconds} unit.
+	 * @default "millisecond"
+	 */
 	millisecondUnitNameSingular: string
 
 	/**
-	Override the plural of the {@linkcode Duration.milliseconds} unit.
-	@default "milliseconds"
-	*/
+	 * Override the plural of the {@linkcode Duration.milliseconds} unit.
+	 * @default "milliseconds"
+	 */
 	millisecondUnitNamePlural: string
 
 	/**
-	When `false`, a space will be inserted before the unit otherwise won't.
-	@default false
-	*/
+	 * When `false`, a space will be inserted before the unit otherwise won't.
+	 * @default false
+	 */
 	noSpaceBeforeUnit: boolean
 }>
 
 /**
-Format a {@linkcode Duration} as a [`string`](https://developer.mozilla.org/en-US/docs/Glossary/String).
-
-@param duration The {@linkcode Duration} to be formatted.
-@param options The {@linkcode FormatDurationOptions} used to confure how duration gets formatted.
-@returns Formatted duration as a [`string`](https://developer.mozilla.org/en-US/docs/Glossary/String).
-@throws Any {@linkcode FormatDurationError}.
-@throws A {@linkcode FormatEmptyDurationError} when given empty duration.
-@throws A {@linkcode FormatNonIntegerDurationError} when given duration with numbers that aren't integers.
-*/
+ * Format a {@linkcode Duration} as a [`string`](https://developer.mozilla.org/en-US/docs/Glossary/String).
+ *
+ * @param duration The {@linkcode Duration} to be formatted.
+ * @param options The {@linkcode FormatDurationOptions} used to confure how duration gets formatted.
+ * @returns Formatted duration as a [`string`](https://developer.mozilla.org/en-US/docs/Glossary/String).
+ * @throws Any {@linkcode FormatDurationError}.
+ * @throws A {@linkcode FormatEmptyDurationError} when given empty duration.
+ * @throws A {@linkcode FormatNonIntegerDurationError} when given duration with numbers that aren't integers.
+ */
 export const formatDuration = (duration: Duration, options: FormatDurationOptions = {}): string => {
 	const nonIntegerEntry = Object.entries(duration).find(([ , value ]) => value && !Number.isInteger(value))
 

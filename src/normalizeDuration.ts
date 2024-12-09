@@ -9,26 +9,26 @@ export class NormalizeNonIntegerDurationError extends NormalizeDurationError {}
 Object.defineProperty(NormalizeNonIntegerDurationError.prototype, `name`, { value: `NormalizeDurationNonIntegerError` })
 
 /**
-Normalize a {@linkcode Duration}.
-
-e.g. 120,000 milliseconds becomes 2 minutes.
-
-This function mutates the given `Duration`, hence why it doesn't return anything.
-
-@param duration The {@linkcode Duration} to be normalized.
-@throws Any {@linkcode NormalizeDurationError}.
-@throws A {@linkcode NormalizeNonIntegerDurationError} for trying to normalize a duration with numbers that aren't integers.
-
-@example Basic usage
-```ts
-import { type Duration, normalizeDuration } from "@samual/duration"
-
-let duration: Duration = { years: 0, days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: Date.now() }
-
-normalizeDuration(duration)
-console.log(duration) // { years: 54, days: 349, hours: 11, minutes: 47, seconds: 14, milliseconds: 227 }
-```
-*/
+ * Normalize a {@linkcode Duration}.
+ *
+ * e.g. 120,000 milliseconds becomes 2 minutes.
+ *
+ * This function mutates the given `Duration`, hence why it doesn't return anything.
+ *
+ * @param duration The {@linkcode Duration} to be normalized.
+ * @throws Any {@linkcode NormalizeDurationError}.
+ * @throws A {@linkcode NormalizeNonIntegerDurationError} for trying to normalize a duration with numbers that aren't integers.
+ *
+ * @example Basic usage
+ * ```ts
+ * import { type Duration, normalizeDuration } from "@samual/duration"
+ *
+ * let duration: Duration = { years: 0, days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: Date.now() }
+ *
+ * normalizeDuration(duration)
+ * console.log(duration) // { years: 54, days: 349, hours: 11, minutes: 47, seconds: 14, milliseconds: 227 }
+ * ```
+ */
 export function normalizeDuration(duration: Duration): void {
 	if (Object.values(duration).some(value => value && !Number.isInteger(value)))
 		throw new NormalizeNonIntegerDurationError(`Given number must be an integer`)
