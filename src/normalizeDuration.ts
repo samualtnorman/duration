@@ -87,7 +87,7 @@ if (import.meta.vitest) {
 		expect(() => normalizeDuration({ seconds: 1.5 })).toThrow(NormalizeNonIntegerDurationError)
 	})
 
-	test(`normaliseDuration() only produces integers`, () => {
+	test(`normalizeDuration() only produces integers`, () => {
 		const duration: Duration = { years: 0, days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: 1733140034227 }
 
 		normalizeDuration(duration)
