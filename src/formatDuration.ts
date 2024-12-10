@@ -1,7 +1,7 @@
 /**
  * Format a {@linkcode Duration} as a [`string`](https://developer.mozilla.org/en-US/docs/Glossary/String).
  *
- * @example
+ * @example Basic Usage
  * ```ts
  * import { formatDuration } from "@samual/duration/formatDuration"
  *
@@ -17,7 +17,7 @@ import { type Duration, DurationError } from "."
 /**
  * Error that can be thrown by {@linkcode formatDuration()}.
  *
- * @example
+ * @example Basic Usage
  * ```ts
  * import { formatDuration, FormatDurationError } from "@samual/duration"
  *
@@ -37,7 +37,7 @@ Object.defineProperty(FormatDurationError.prototype, `name`, { value: `FormatDur
 /**
  * Error that can be thrown by {@linkcode formatDuration()} for trying to format an empty duration.
  *
- * @example
+ * @example Basic Usage
  * ```ts
  * import { formatDuration, FormatEmptyDurationError } from "@samual/duration"
  *
@@ -57,7 +57,7 @@ Object.defineProperty(FormatEmptyDurationError.prototype, `name`, { value: `Form
 /**
  * Error that can be thrown by {@linkcode formatDuration()} for trying to format non-integers.
  *
- * @example
+ * @example Basic Usage
  * ```ts
  * import { formatDuration, FormatNonIntegerDurationError } from "@samual/duration"
  *
@@ -77,7 +77,7 @@ Object.defineProperty(FormatEmptyDurationError.prototype, `name`, { value: `Form
 /**
  * Available options for configuring {@linkcode formatDuration()}.
  *
- * @example
+ * @example Basic Usage
  * ```ts
  * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
  *
@@ -111,7 +111,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 *
 	 * @default false
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -128,7 +128,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * [`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined).
 	 * @default undefined
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -144,7 +144,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the name of the {@linkcode Duration.years} unit.
 	 * @default "year"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -160,7 +160,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the plural of the {@linkcode Duration.years} unit.
 	 * @default "years"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -176,7 +176,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the name of the {@linkcode Duration.days} unit.
 	 * @default "day"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -192,7 +192,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the plural of the {@linkcode Duration.days} unit.
 	 * @default "days"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -208,7 +208,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the name of the {@linkcode Duration.hours} unit.
 	 * @default "hour"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -223,7 +223,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the plural of the {@linkcode Duration.hours} unit.
 	 * @default "hours"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -239,7 +239,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the name of the {@linkcode Duration.minutes} unit.
 	 * @default "minute"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -254,7 +254,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the plural of the {@linkcode Duration.minutes} unit.
 	 * @default "minutes"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -270,7 +270,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the name of the {@linkcode Duration.seconds} unit.
 	 * @default "second"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -285,7 +285,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the plural of the {@linkcode Duration.seconds} unit.
 	 * @default "seconds"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -301,7 +301,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the name of the {@linkcode Duration.milliseconds} unit.
 	 * @default "millisecond"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -316,7 +316,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * Override the plural of the {@linkcode Duration.milliseconds} unit.
 	 * @default "milliseconds"
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -332,7 +332,7 @@ export type FormatDurationOptions = LaxPartial<{
 	 * When `false`, a space will be inserted before the unit otherwise won't.
 	 * @default false
 	 *
-	 * @example
+	 * @example Basic Usage
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
@@ -355,7 +355,7 @@ export type FormatDurationOptions = LaxPartial<{
  * @throws A {@linkcode FormatEmptyDurationError} when given empty duration.
  * @throws A {@linkcode FormatNonIntegerDurationError} when given duration with numbers that aren't integers.
  *
- * @example
+ * @example Basic Usage
  * ```ts
  * import { formatDuration } from "@samual/duration/formatDuration"
  *

@@ -1,9 +1,25 @@
+/**
+ * Normalize a {@linkcode Duration}.
+ *
+ * @example Basic Usage
+ * ```ts
+ * import { type Duration, normalizeDuration } from "@samual/duration/normalizeDuration"
+ *
+ * let duration: Duration = { years: 0, days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: Date.now() }
+ *
+ * normalizeDuration(duration)
+ * console.log(duration) // { years: 54, days: 349, hours: 11, minutes: 47, seconds: 14, milliseconds: 227 }
+ * ```
+ *
+ * @module
+ */
+
 import { type Duration, DurationError } from "."
 
 /**
  * Error that can be thrown by {@linkcode normalizeDuration()}.
  *
- * @example
+ * @example Basic Usage
  * ```ts
  * import { normalizeDuration, NormalizeDurationError } from "@samual/duration"
  *
@@ -23,7 +39,7 @@ Object.defineProperty(NormalizeDurationError.prototype, `name`, { value: `Normal
 /**
  * Error that can be thrown by {@linkcode normalizeDuration()} for trying to normalize non-integers.
  *
- * @example
+ * @example Basic Usage
  * ```ts
  * import { normalizeDuration, NormalizeNonIntegerDurationError } from "@samual/duration"
  *
@@ -51,7 +67,7 @@ Object.defineProperty(NormalizeNonIntegerDurationError.prototype, `name`, { valu
  * @throws Any {@linkcode NormalizeDurationError}.
  * @throws A {@linkcode NormalizeNonIntegerDurationError} for trying to normalize a duration with numbers that aren't integers.
  *
- * @example Basic usage
+ * @example Basic Usage
  * ```ts
  * import { type Duration, normalizeDuration } from "@samual/duration"
  *

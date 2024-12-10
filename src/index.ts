@@ -1,7 +1,7 @@
 /**
  * Normalize and format durations of time.
  *
- * @example
+ * @example Basic Usage
  * ```ts
  * import { type Duration, normalizeDuration, formatDuration } from "@samual/duration"
  *
@@ -27,7 +27,7 @@ import type { LaxPartial } from "@samual/lib"
  * Absent properties and properties set to `undefined` are treated the same.
  * More units of time will be added in the future.
  *
- * @example Basic usage
+ * @example Basic Usage
  * ```ts
  * import type { Duration } from "@samual/duration"
  *
@@ -99,7 +99,7 @@ export type Duration = LaxPartial<{
 /**
  * Parent error of all errors intentionally thrown by `@samual/duration`.
  *
- * @example
+ * @example Basic Usage
  * ```ts
  * import { type Duration, normalizeDuration, formatDuration } from "@samual/duration"
  *
