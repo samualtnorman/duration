@@ -1,10 +1,42 @@
 import { type Duration, DurationError } from "."
 
-/** Error that can be thrown by {@linkcode normalizeDuration()}. */
+/**
+ * Error that can be thrown by {@linkcode normalizeDuration()}.
+ *
+ * @example
+ * ```ts
+ * import { normalizeDuration, NormalizeDurationError } from "@samual/duration"
+ *
+ * try {
+ * 	normalizeDuration(duration)
+ * } catch (error) {
+ * 	if (error instanceof NormalizeDurationError) {
+ * 		// ...
+ * 	} else
+ * 		throw error
+ * }
+ * ```
+ */
 export class NormalizeDurationError extends DurationError {}
 Object.defineProperty(NormalizeDurationError.prototype, `name`, { value: `NormalizeDurationError` })
 
-/** Error that can be thrown by {@linkcode normalizeDuration()} for trying to normalize non-integers. */
+/**
+ * Error that can be thrown by {@linkcode normalizeDuration()} for trying to normalize non-integers.
+ *
+ * @example
+ * ```ts
+ * import { normalizeDuration, NormalizeNonIntegerDurationError } from "@samual/duration"
+ *
+ * try {
+ * 	normalizeDuration(duration)
+ * } catch (error) {
+ * 	if (error instanceof NormalizeNonIntegerDurationError) {
+ * 		// ...
+ * 	} else
+ * 		throw error
+ * }
+ * ```
+ */
 export class NormalizeNonIntegerDurationError extends NormalizeDurationError {}
 Object.defineProperty(NormalizeNonIntegerDurationError.prototype, `name`, { value: `NormalizeDurationNonIntegerError` })
 

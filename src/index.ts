@@ -1,6 +1,7 @@
 /**
  * Normalize and format durations of time.
  *
+ * @example
  * ```ts
  * import { type Duration, normalizeDuration, formatDuration } from "@samual/duration"
  *
@@ -95,7 +96,23 @@ export type Duration = LaxPartial<{
 	milliseconds: number
 }>
 
-/** Parent error of all errors intentionally thrown by `@samual/duration`. */
+/**
+ * Parent error of all errors intentionally thrown by `@samual/duration`.
+ *
+ * @example
+ * ```ts
+ * import { type Duration, normalizeDuration, formatDuration } from "@samual/duration"
+ *
+ * try {
+ * 	// ...
+ * } catch (error) {
+ * 	if (error instanceof DurationError)
+ * 		console.error("Caught", error)
+ * 	else
+ * 		throw error
+ * }
+ * ```
+ */
 export class DurationError extends Error {}
 Object.defineProperty(DurationError.prototype, `name`, { value: `DurationError` })
 
