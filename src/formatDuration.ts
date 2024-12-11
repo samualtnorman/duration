@@ -141,6 +141,22 @@ export type FormatDurationOptions = LaxPartial<{
 	maxEntries: number
 
 	/**
+	 * When `false`, a space will be inserted before the unit otherwise won't.
+	 * @default false
+	 *
+	 * @example Basic Usage
+	 * ```ts
+	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
+	 *
+	 * let duration: Duration = { milliseconds: 500 }
+	 *
+	 * console.log(formatDuration(duration, { millisecondUnitNamePlural: "ms" })) // "500 ms"
+	 * console.log(formatDuration(duration, { millisecondUnitNamePlural: "ms", noSpaceBeforeUnit: true })) // "500ms"
+	 * ```
+	 */
+	noSpaceBeforeUnit: boolean
+
+	/**
 	 * Override the name of the {@linkcode Duration.years} unit.
 	 * @default "year"
 	 *
@@ -327,22 +343,6 @@ export type FormatDurationOptions = LaxPartial<{
 	 * ```
 	 */
 	millisecondUnitNamePlural: string
-
-	/**
-	 * When `false`, a space will be inserted before the unit otherwise won't.
-	 * @default false
-	 *
-	 * @example Basic Usage
-	 * ```ts
-	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
-	 *
-	 * let duration: Duration = { milliseconds: 500 }
-	 *
-	 * console.log(formatDuration(duration, { millisecondUnitNamePlural: "ms" })) // "500 ms"
-	 * console.log(formatDuration(duration, { millisecondUnitNamePlural: "ms", noSpaceBeforeUnit: true })) // "500ms"
-	 * ```
-	 */
-	noSpaceBeforeUnit: boolean
 }>
 
 /**
