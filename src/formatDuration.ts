@@ -157,6 +157,30 @@ export type FormatDurationOptions = LaxPartial<{
 	noSpaceBeforeUnit: boolean
 
 	/**
+	 * When `false`, a comma will be used to seperate each entry in the formatted duration otherwise won't.
+	 * @default false
+	 *
+	 * @example Basic Usage
+	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
+	 *
+	 * let duration: Duration = { days: 1, hours: 12, minutes: 30 }
+	 *
+	 * let options: FormatDurationOptions = {
+	 * 	noSpaceBeforeUnit: true,
+	 * 	dayUnitNameSingular: `d`,
+	 * 	dayUnitNamePlural: `d`,
+	 * 	hourUnitNameSingular: `h`,
+	 * 	hourUnitNamePlural: `h`,
+	 * 	minuteUnitNameSingular: `m`,
+	 * 	minuteUnitNamePlural: `m`
+	 * }
+	 *
+	 * console.log(formatDuration(duration, options)) // "1d, 12h, 30m"
+	 * console.log(formatDuration(duration, { ...options, noComma: true })) // "1d 12h 30m"
+	 */
+	noComma: boolean
+
+	/**
 	 * Override the name of the {@linkcode Duration.years} unit.
 	 * @default "year"
 	 *
@@ -465,5 +489,24 @@ if (import.meta.vitest) {
 
 	test(`hideZero: true shows smallest unit when all 0`, () => {
 		expect(formatDuration({ hours: 0, minutes: 0, seconds: 0 }, { hideZero: true })).toBe(`0 seconds`)
+	})
+
+	test(`noComma: true`, () => {
+		expect(formatDuration({ years: 54, days: 349, hours: 11, minutes: 47, seconds: 14, milliseconds: 227 }, {
+			yearUnitNameSingular: `y`,
+			yearUnitNamePlural: `y`,
+			dayUnitNameSingular: `d`,
+			dayUnitNamePlural: `d`,
+			hourUnitNameSingular: `h`,
+			hourUnitNamePlural: `h`,
+			minuteUnitNameSingular: `m`,
+			minuteUnitNamePlural: `m`,
+			secondUnitNameSingular: `s`,
+			secondUnitNamePlural: `s`,
+			millisecondUnitNameSingular: `ms`,
+			millisecondUnitNamePlural: `ms`,
+			noSpaceBeforeUnit: true,
+			noComma: true
+		})).toBe(`54y 349d 11h 47m 14s 227ms`)
 	})
 }
