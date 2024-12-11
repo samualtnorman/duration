@@ -407,7 +407,7 @@ export const formatDuration = (duration: Duration, options: FormatDurationOption
 		if (nonZeros.length)
 			return nonZeros.map(item => `${item.value}${options.noSpaceBeforeUnit ? `` : ` `}${item.unit}`).join(`, `)
 
-		return `0 ${entries[0]!.unit}`
+		return `0 ${entries.at(-1)!.unit}`
 	}
 
 	return entries.map(item => `${item.value}${options.noSpaceBeforeUnit ? `` : ` `}${item.unit}`).join(`, `)
