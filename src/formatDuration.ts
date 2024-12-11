@@ -462,4 +462,8 @@ if (import.meta.vitest) {
 			noSpaceBeforeUnit: true
 		})).toBe(`54y, 349d, 11h, 47m, 14s, 227ms`)
 	})
+
+	test(`hideZero: true shows smallest unit when all 0`, () => {
+		expect(formatDuration({ hours: 0, minutes: 0, seconds: 0 }, { hideZero: true })).toBe(`0 seconds`)
+	})
 }
