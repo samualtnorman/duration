@@ -12,7 +12,8 @@
  */
 
 import type { LaxPartial } from "@samual/lib"
-import { type Duration, DurationError } from "."
+import type { Duration } from "."
+import { DurationError } from "./DurationError"
 
 /**
  * Error that can be thrown by {@linkcode formatDuration()}.
