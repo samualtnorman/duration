@@ -35,6 +35,7 @@
 		"@types/node": "^18.19.70",
 		"@types/semver": "^7.5.8",
 		"babel-plugin-here": "^1.0.2",
+		"jsr": "^0.13.2",
 		"rollup": "^4.30.1",
 		"semver": "^7.6.3",
 		"typescript": "^5.7.2",

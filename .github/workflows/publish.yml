@@ -17,7 +17,7 @@ jobs:
       - { name: Setup pnpm, uses: pnpm/action-setup@v4, with: { version: ^9, run_install: true } }
       - run: git config --global user.email github-action@users.noreply.github.com
       - run: git config --global user.name "Github Action"
-      - run: export PATH=$PWD/node_modules/.bin:$PATH
+      - run: echo $PWD/node_modules/.bin:$PATH > $GITHUB_PATH
       - run: scripts/version-dev.js
       - run: scripts/jsr.sh
-      - { run: git init && pnpm dlx jsr publish --allow-dirty, working-directory: dist }
+      - { run: git init && jsr publish --allow-dirty, working-directory: dist }
