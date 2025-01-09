@@ -15,7 +15,11 @@ writeFileSync("dist/jsr.json", JSON.stringify({
 		...Object.fromEntries(
 			(await findFiles(`dist`))
 				.filter(path => path.endsWith(`.js`))
-				.flatMap(path => [ [ `.${path.slice(4, -3)}`, `.${path.slice(4)}` ], [ `.${path.slice(4)}`, `.${path.slice(4)}` ] ])
+				.flatMap(path => [
+					[ `.${path.slice(4, -3)}`, `.${path.slice(4)}` ],
+					[ `.${path.slice(4)}`, `.${path.slice(4)}` ],
+					[ `.${path.slice(4, -3)}.d.ts`, `.${path.slice(4, -3)}.d.ts` ]
+				])
 		)
 	},
 	license
