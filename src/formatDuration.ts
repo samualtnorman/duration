@@ -446,7 +446,7 @@ export const formatDuration = (duration: Duration, options: FormatDurationOption
 		if (nonZeros.length) {
 			return nonZeros.slice(0, options.maxEntries)
 				.map(item => `${item.value}${options.noSpaceBeforeUnit ? `` : ` `}${item.unit}`)
-				.join(options.separator || `, `)
+				.join(options.separator ?? `, `)
 		}
 
 		return `0 ${entries.at(-1)!.unit}`
@@ -454,7 +454,7 @@ export const formatDuration = (duration: Duration, options: FormatDurationOption
 
 	return entries.slice(0, options.maxEntries)
 		.map(item => `${item.value}${options.noSpaceBeforeUnit ? `` : ` `}${item.unit}`)
-		.join(options.separator || `, `)
+		.join(options.separator ?? `, `)
 }
 
 if (import.meta.vitest) {
