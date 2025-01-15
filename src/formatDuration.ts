@@ -115,6 +115,7 @@ export type FormatDurationOptions = LaxPartial<{
 	/**
 	 * When set to `true`, skips formatting entries that are `0`, as if they were set to
 	 * [`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined).
+	 * Or if set to `"leading"`, only skips formatting leading entries that are `0`, as if they were set to `undefined`.
 	 *
 	 * @default false
 	 *
@@ -122,13 +123,14 @@ export type FormatDurationOptions = LaxPartial<{
 	 * ```ts
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
 	 *
-	 * let duration: Duration = { years: 0, days: 1, hours: 8 }
+	 * let duration: Duration = { years: 0, days: 1, hours: 0, minutes: 30 }
 	 *
-	 * console.log(formatDuration(duration)) // "0 years, 1 day, 8 hours"
-	 * console.log(formatDuration(duration, { hideZero: true })) // "1 day, 8 hours"
+	 * console.log(formatDuration(duration)) // "0 years, 1 day, 0 hours, 30 minutes"
+	 * console.log(formatDuration(duration, { hideZero: true })) // "1 day, 30 minutes"
+	 * console.log(formatDuration(duration, { hideZero: "leading" })) // "1 day, 0 hours, 30 minutes"
 	 * ```
 	 */
-	hideZero: boolean
+	hideZero: boolean | `leading`
 
 	/**
 	 * The maximum number of entries to format or has no affect when set to
@@ -542,5 +544,10 @@ if (import.meta.vitest) {
 
 	test(`allow empty separator`, () => {
 		expect(formatDuration({ seconds: 1, milliseconds: 2 }, { separator: `` })).toBe(`1 second2 milliseconds`)
+	})
+
+	test(`hide leading zeros`, () => {
+		expect(formatDuration({ hours: 0, minutes: 1, seconds: 0, milliseconds: 2 }, { hideZero: `leading` }))
+			.toBe(`1 minute, 0 seconds, 2 milliseconds`)
 	})
 }
