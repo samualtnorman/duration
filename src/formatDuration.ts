@@ -510,4 +510,9 @@ if (import.meta.vitest) {
 			noComma: true
 		})).toBe(`54y 349d 11h 47m 14s 227ms`)
 	})
+
+	test(`hideZero and maxEntries used together`, () => {
+		expect(formatDuration({ hours: 0, minutes: 15, seconds: 30, milliseconds: 500 }, { hideZero: true, maxEntries: 2 }))
+			.toBe(`15 minutes, 30 seconds`)
+	})
 }
