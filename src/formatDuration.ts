@@ -539,4 +539,8 @@ if (import.meta.vitest) {
 		expect(() => formatDuration({ milliseconds: 0 }, { maxEntries: 0 })).toThrowError(FormatDurationError)
 		expect(() => formatDuration({ milliseconds: 0 }, { maxEntries: 1.5 })).toThrowError(FormatDurationError)
 	})
+
+	test(`allow empty separator`, () => {
+		expect(formatDuration({ seconds: 1, milliseconds: 2 }, { separator: `` })).toBe(`1 second2 milliseconds`)
+	})
 }
