@@ -443,7 +443,9 @@ export const formatDuration = (duration: Duration, options: FormatDurationOption
 		throw new FormatEmptyDurationError(`Cannot format empty duration`)
 
 	if (options.hideZero) {
-		const nonZeros = entries.filter(item => item.value)
+		const nonZeros = options.hideZero == `leading`
+			? entries.slice(Math.max(0, entries.findIndex(item => item.value)))
+			: entries.filter(item => item.value)
 
 		if (nonZeros.length) {
 			return nonZeros.slice(0, options.maxEntries)
