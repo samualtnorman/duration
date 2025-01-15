@@ -394,6 +394,14 @@ export type FormatDurationOptions = LaxPartial<{
  * ```
  */
 export const formatDuration = (duration: Duration, options: FormatDurationOptions = {}): string => {
+	if (options.maxEntries != undefined) {
+		if (options.maxEntries < 1)
+			throw new FormatDurationOptionError(`maxEntries must be at least 1`)
+
+		if (!Number.isInteger(options.maxEntries))
+			throw new FormatDurationOptionError(`maxEntries must be an integer`)
+	}
+
 	const nonIntegerEntry = Object.entries(duration).find(([ , value ]) => value && !Number.isInteger(value))
 
 	if (nonIntegerEntry)
