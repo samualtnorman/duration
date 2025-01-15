@@ -76,6 +76,12 @@ export class FormatNonIntegerDurationError extends FormatDurationError {}
 Object.defineProperty(FormatEmptyDurationError.prototype, `name`, { value: `FormatEmptyDurationError` })
 
 /**
+ * Error that can be thrown by {@linkcode formatDuration()} for trying to pass invalid {@link FormatDurationOptions options}.
+ */
+export class FormatDurationOptionError extends FormatDurationError {}
+Object.defineProperty(FormatDurationOptionError.prototype, `name`, { value: `FormatDurationOptionError` })
+
+/**
  * Available options for configuring {@linkcode formatDuration()}.
  *
  * @example Basic Usage
@@ -519,5 +525,10 @@ if (import.meta.vitest) {
 	test(`hideZero and maxEntries used together`, () => {
 		expect(formatDuration({ hours: 0, minutes: 15, seconds: 30, milliseconds: 500 }, { hideZero: true, maxEntries: 2 }))
 			.toBe(`15 minutes, 30 seconds`)
+	})
+
+	test(`error on invalid maxEntries`, () => {
+		expect(() => formatDuration({ milliseconds: 0 }, { maxEntries: 0 })).toThrowError(FormatDurationError)
+		expect(() => formatDuration({ milliseconds: 0 }, { maxEntries: 1.5 })).toThrowError(FormatDurationError)
 	})
 }
