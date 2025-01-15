@@ -421,7 +421,7 @@ export const formatDuration = (duration: Duration, options: FormatDurationOption
 			value: duration.milliseconds,
 			unit: duration.milliseconds == 1 ? millisecondUnitNameSingular : millisecondUnitNamePlural
 		},
-	].filter(Boolean).slice(0, options.maxEntries)
+	].filter(Boolean)
 
 	if (!entries.length)
 		throw new FormatEmptyDurationError(`Cannot format empty duration`)
@@ -429,13 +429,18 @@ export const formatDuration = (duration: Duration, options: FormatDurationOption
 	if (options.hideZero) {
 		const nonZeros = entries.filter(item => item.value)
 
-		if (nonZeros.length)
-			return nonZeros.map(item => `${item.value}${options.noSpaceBeforeUnit ? `` : ` `}${item.unit}`).join(options.noComma ? ` ` : `, `)
+		if (nonZeros.length) {
+			return nonZeros.slice(0, options.maxEntries)
+				.map(item => `${item.value}${options.noSpaceBeforeUnit ? `` : ` `}${item.unit}`)
+				.join(options.noComma ? ` ` : `, `)
+		}
 
 		return `0 ${entries.at(-1)!.unit}`
 	}
 
-	return entries.map(item => `${item.value}${options.noSpaceBeforeUnit ? `` : ` `}${item.unit}`).join(options.noComma ? ` ` : `, `)
+	return entries.slice(0, options.maxEntries)
+		.map(item => `${item.value}${options.noSpaceBeforeUnit ? `` : ` `}${item.unit}`)
+		.join(options.noComma ? ` ` : `, `)
 }
 
 if (import.meta.vitest) {
