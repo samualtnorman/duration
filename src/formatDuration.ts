@@ -158,8 +158,8 @@ export type FormatDurationOptions = LaxPartial<{
 	noSpaceBeforeUnit: boolean
 
 	/**
-	 * When `false`, a comma will be used to seperate each entry in the formatted duration otherwise won't.
-	 * @default false
+	 * The string used to seperate each entry in the formatted duration.
+	 * @default ", "
 	 *
 	 * @example Basic Usage
 	 * import { formatDuration, type Duration, type FormatDurationOptions } from "@samual/duration"
@@ -177,9 +177,9 @@ export type FormatDurationOptions = LaxPartial<{
 	 * }
 	 *
 	 * console.log(formatDuration(duration, options)) // "1d, 12h, 30m"
-	 * console.log(formatDuration(duration, { ...options, noComma: true })) // "1d 12h 30m"
+	 * console.log(formatDuration(duration, { ...options, separator: " " })) // "1d 12h 30m"
 	 */
-	noComma: boolean
+	separator: string
 
 	/**
 	 * Override the name of the {@linkcode Duration.years} unit.
@@ -497,7 +497,7 @@ if (import.meta.vitest) {
 		expect(formatDuration({ hours: 0, minutes: 0, seconds: 0 }, { hideZero: true })).toBe(`0 seconds`)
 	})
 
-	test(`noComma: true`, () => {
+	test(`separator`, () => {
 		expect(formatDuration({ years: 54, days: 349, hours: 11, minutes: 47, seconds: 14, milliseconds: 227 }, {
 			yearUnitNameSingular: `y`,
 			yearUnitNamePlural: `y`,
@@ -512,7 +512,7 @@ if (import.meta.vitest) {
 			millisecondUnitNameSingular: `ms`,
 			millisecondUnitNamePlural: `ms`,
 			noSpaceBeforeUnit: true,
-			noComma: true
+			separator: ` `
 		})).toBe(`54y 349d 11h 47m 14s 227ms`)
 	})
 
