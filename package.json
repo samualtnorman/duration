@@ -25,7 +25,7 @@
 		"./*.js": "./*.js"
 	},
 	"dependencies": {
-		"@samual/lib": "^0.13.0"
+		"@samual/lib": "0.13.1-e3379e2"
 	},
 	"devDependencies": {
 		"@babel/plugin-syntax-typescript": "^7.25.9",
