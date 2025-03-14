@@ -1,7 +1,5 @@
 #!/bin/sh
-set -e
-export PATH=$PWD/node_modules/.bin:$PATH
-set -x
-tsc
-tsc --project src
-vitest run
+set -ex
+node_modules/.bin/tsc
+node_modules/.bin/tsc --project src
+node_modules/.bin/vitest run

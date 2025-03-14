@@ -9,15 +9,14 @@ jobs:
 
     steps:
       - { name: Checkout, uses: actions/checkout@v4 }
+      - { name: Setup pnpm, uses: pnpm/action-setup@v4, with: { version: ^10, run_install: true } }
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with: { node-version: ^18.20 || ^20.10 || >=22 }
 
-      - { name: Setup pnpm, uses: pnpm/action-setup@v4, with: { version: ^10, run_install: true } }
       - run: git config --global user.email github-action@users.noreply.github.com
       - run: git config --global user.name "Github Action"
-      - run: echo $PWD/node_modules/.bin:$PATH > $GITHUB_PATH
       - run: scripts/version-dev.js
       - run: scripts/jsr.sh
       - { run: git init && jsr publish --allow-dirty, working-directory: dist }
@@ -37,7 +36,6 @@ jobs:
 
       - run: git config --global user.email github-action@users.noreply.github.com
       - run: git config --global user.name "Github Action"
-      - run: echo $PWD/node_modules/.bin:$PATH > $GITHUB_PATH
       - run: scripts/version-dev.js
       - run: scripts/npm.sh
 
