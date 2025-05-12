@@ -19,7 +19,7 @@ jobs:
       - run: git config --global user.name "Github Action"
       - run: scripts/version-dev.js
       - run: scripts/jsr.sh
-      - { run: git init && jsr publish --allow-dirty, working-directory: dist }
+      - { run: git init && ../node_modules/.bin/jsr publish --allow-dirty, working-directory: dist }
 
   npm:
     name: NPM
