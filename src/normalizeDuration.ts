@@ -14,8 +14,8 @@
  * @module
  */
 
-import type { Duration } from "."
 import { DurationError } from "./DurationError"
+import type { Duration } from "./index"
 
 /**
  * Error that can be thrown by {@linkcode normalizeDuration()}.
