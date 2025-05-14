@@ -11,7 +11,7 @@
  * @module
  */
 
-import type { LaxPartial } from "@samual/lib"
+import type { LaxPartial } from "@samual/types"
 import { DurationError } from "./DurationError"
 import type { Duration } from "./index"
 

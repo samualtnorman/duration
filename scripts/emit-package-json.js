@@ -2,8 +2,12 @@
 import { mkdirSync as makeDirectorySync, writeFileSync } from "fs"
 import packageJson_ from "../package.json" with { type: "json" }
 
-const { private: _, devDependencies, engines: { pnpm, ...engines }, ...packageJson } = packageJson_
+const { private: _, dependencies, devDependencies, engines: { pnpm, ...engines }, ...packageJson } = packageJson_
 
 makeDirectorySync("dist", { recursive: true })
-writeFileSync("dist/package.json", JSON.stringify({ ...packageJson, engines }, undefined, "\t"))
+writeFileSync("dist/package.json", JSON.stringify({
+	...packageJson,
+	engines,
+	...process.argv[2] != `jsr` && { dependencies }
+}, undefined, "\t"))
 process.exit()

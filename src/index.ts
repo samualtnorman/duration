@@ -15,7 +15,7 @@
  * @module
  */
 
-import type { LaxPartial } from "@samual/lib"
+import type { LaxPartial } from "@samual/types"
 
 /**
  * A duration of time.

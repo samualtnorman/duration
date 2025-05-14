@@ -3,5 +3,5 @@ set -ex
 rm dist --recursive --force
 ./rollup.config.js --configJsr
 scripts/emit-dts.sh
-scripts/emit-package-json.js
+scripts/emit-package-json.js jsr
 scripts/emit-jsr-json.js
