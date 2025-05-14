@@ -10,6 +10,7 @@ makeDirectorySync("dist", { recursive: true })
 writeFileSync("dist/jsr.json", JSON.stringify({
 	name,
 	version,
+	license,
 	exports: {
 		".": `./index.js`,
 		...Object.fromEntries(
@@ -17,8 +18,7 @@ writeFileSync("dist/jsr.json", JSON.stringify({
 				.filter(path => path != `dist/index.js` && path.endsWith(`.js`))
 				.map(path => [ `.${path.slice(4, -3)}`, `.${path.slice(4)}` ])
 		)
-	},
-	license
+	}
 }, undefined, "\t"))
 
 process.exit()
