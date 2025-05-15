@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { findFiles } from "@samual/lib/findFiles"
 import { mkdirSync as makeDirectorySync, writeFileSync } from "fs"
 import packageJson from "../package.json" with { type: "json" }
+import { exports } from "./lib/exports.js"
 
 const { name, version, license, dependencies } = packageJson
 
@@ -11,14 +11,7 @@ writeFileSync("dist/jsr.json", JSON.stringify({
 	name,
 	version,
 	license,
-	exports: {
-		".": `./index.js`,
-		...Object.fromEntries(
-			(await findFiles(`dist`))
-				.filter(path => path != `dist/index.js` && path.endsWith(`.js`))
-				.map(path => [ `.${path.slice(4, -3)}`, `.${path.slice(4)}` ])
-		)
-	},
+	exports,
 	imports: { "@samual/types": `jsr:@samual/types@${dependencies[`@samual/types`]}` }
 }, undefined, "\t"))
 

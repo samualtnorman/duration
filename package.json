@@ -19,11 +19,6 @@
 	"author": "Samual Norman <me@samual.uk> (https://samual.uk/)",
 	"repository": "github:samualtnorman/duration",
 	"type": "module",
-	"exports": {
-		".": "./index.js",
-		"./*": "./*.js",
-		"./*.js": "./*.js"
-	},
 	"dependencies": {
 		"@samual/types": "^0.0.1"
 	},
