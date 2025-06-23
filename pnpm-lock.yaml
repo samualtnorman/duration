@@ -12,12 +12,6 @@ importers:
         specifier: ^0.0.1
         version: 0.0.1
     devDependencies:
-      '@babel/plugin-syntax-typescript':
-        specifier: ^7.27.1
-        version: 7.27.1(@babel/core@7.24.6)
-      '@rollup/plugin-babel':
-        specifier: ^6.0.4
-        version: 6.0.4(@babel/core@7.24.6)(rollup@4.40.2)
       '@samual/lib':
         specifier: 0.13.1-e3379e2
         version: 0.13.1-e3379e2
@@ -33,9 +27,6 @@ importers:
       '@types/semver':
         specifier: ^7.7.0
         version: 7.7.0
-      babel-plugin-here:
-        specifier: ^1.0.2
-        version: 1.0.2
       jsr:
         specifier: ^0.13.4
         version: 0.13.4
