@@ -32,6 +32,7 @@
 		"@types/semver": "^7.7.0",
 		"babel-plugin-here": "^1.0.2",
 		"jsr": "^0.13.4",
+		"knip": "^5.61.2",
 		"rollup": "^4.40.2",
 		"semver": "^7.7.2",
 		"typescript": "^5.8.3",
