@@ -1,6 +1,6 @@
 {
 	"name": "@samual/duration",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "Normalize and format durations of time.",
 	"keywords": [
 		"date",
