@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { mkdirSync as makeDirectorySync, writeFileSync } from "fs"
 import packageJson from "../package.json" with { type: "json" }
-import { exports } from "./lib/exports.js"
+import { getExports } from "./lib/exports.js"
 
 const { name, version, license, dependencies } = packageJson
 
@@ -11,7 +11,7 @@ writeFileSync("dist/jsr.json", JSON.stringify({
 	name,
 	version,
 	license,
-	exports,
+	exports: await getExports(`.ts`),
 	imports: { "@samual/types": `jsr:@samual/types@${dependencies[`@samual/types`]}` }
 }, undefined, "\t"))
 

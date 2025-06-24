@@ -1,8 +1,7 @@
 #!/bin/sh
 set -ex
 rm dist --recursive --force
-./rollup.config.js --configJsr
-scripts/emit-dts.sh
-scripts/prepend-readme.js
-scripts/emit-package-json.js jsr
+mkdir dist --parents
+cp src/*.ts dist
+scripts/prepend-readme.js readme.md dist/index.ts
 scripts/emit-jsr-json.js

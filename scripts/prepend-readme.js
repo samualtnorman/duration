@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync } from "fs"
 
-const readme = readFileSync(`readme.md`, { encoding: `utf8` })
-const index = readFileSync(`dist/index.d.ts`, { encoding: `utf8` })
+const [ ,, readmePath, targetPath ] = process.argv
+
+if (!(readmePath && targetPath))
+	process.exit(1)
+
+const readme = readFileSync(readmePath, { encoding: `utf8` })
+const targetContent = readFileSync(targetPath, { encoding: `utf8` })
 
 writeFileSync(
-	`dist/index.d.ts`,
-	`/**\n * ${readme.trim().replaceAll(`*/`, `*\u200D/`).replaceAll(`\n`, `\n * `)}\n * @module\n */\n${index}`
+	targetPath,
+	`/**\n * ${readme.trim().replaceAll(`*/`, `*\u200D/`).replaceAll(`\n`, `\n * `)}\n * @module\n */\n${targetContent}`
 )
